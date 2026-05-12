@@ -22,4 +22,12 @@ class Band {
     );
   }
 
+  factory Band.fromMap(Map<String, dynamic> obj) => Band(
+      id: obj['id'],
+      nomen: obj['nomen'],
+      numerusVotum: obj['numerusVotum'],
+    );
+
+
+
 }
