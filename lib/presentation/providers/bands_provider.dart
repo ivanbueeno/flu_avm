@@ -40,7 +40,7 @@ class BandsNotifier extends StateNotifier<BandsState> {
 
   BandsNotifier() : super(BandsState(
     serverStatus: ServerStatus.Connecting,
-    socket: IO.io('http://192.168.68.102', IO.OptionBuilder()
+    socket: IO.io('http://192.168.1.40:3000', IO.OptionBuilder()
       .setTransports(['websocket'])
       .enableAutoConnect()
       .build()
@@ -60,8 +60,25 @@ class BandsNotifier extends StateNotifier<BandsState> {
         state = state.copyWith(serverStatus: ServerStatus.Offline);
       });
 
-
+      state.socket.on('BANDS_LIST', (payload) {
+        final bands = (payload as List).map((band) => Band.fromMap(band)).toList();
+        state = state.copyWith(bands: bands);
+      });
     }
+
+      void addereBand(String nomen) {
+        if (nomen.length > 1) {
+          state.socket.emit('ADD_BAND', {'nomen': nomen});
+        }
+      }
+
+      void delereBand(String id) {
+        state.socket.emit('DELETE_BAND', {'id': id});
+      }
+
+      void addereVotum(String id) {
+        state.socket.emit('VOTE_BAND', {'id': id});
+      }
 
 }
 
