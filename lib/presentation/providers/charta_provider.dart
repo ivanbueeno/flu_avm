@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
+import '../../config/config.dart';
+
 
 final formNomenProvider = StateProvider<String>((ref) => '');
 
@@ -16,10 +18,5 @@ final coordsMarkerProvider = StateProvider<Position>((ref) => initialisMarkerPos
 
 
 final socketServiceProvider = Provider<ChartaService>((ref) {
-
   final service = ChartaService();
-
-  ref.onDispose(service.finire);
-
-  return service;
-});
+  ref.onDispose(servi

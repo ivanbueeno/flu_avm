@@ -121,6 +121,16 @@ class ComplereForm extends ConsumerWidget {
 
     if (nameValue.isEmpty) return;
 
+    final socketService = ref.read(socketServiceProvider);
+
+    socketService.conectare();
+
+    socketService.mittereUsor(
+      nomen: nameValue,
+      colorHex: colorValue,
+      position: ref.read(coordsMarkerProvider),
+    );
+
     ref.read(markerPositumProvider.notifier).state = true;
 
     // ignore: avoid_print
@@ -192,16 +202,4 @@ class ComplereForm extends ConsumerWidget {
                 ),
                 SizedBox(height: 16),
               ],
-            ),
-          ),
-        );
-      },
-    );
-
-    // Si se ha seleccionado un color, se establece como estado del provider
-    if (electusColor != null) {
-      ref.read(formColorProvider.notifier).state = electusColor;
-    }
-  }
-
-}
+           
