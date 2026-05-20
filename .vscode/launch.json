@@ -25,14 +25,14 @@
       //   "flutterMode": "debug",
       //   "deviceId": "7777CC2C-C7E7-4266-8E7E-C42E6FF66E1E"
       // },
-    //   {
-    //     "name": "Android (emulador)",
-    //     "program": "lib/main.dart",
-    //     "request": "launch",
-    //     "type": "dart",
-    //     "flutterMode": "debug",
-    //     "deviceId": "emulator-5554"
-    //   },
+      {
+        "name": "Android (emulador)",
+        "program": "lib/main.dart",
+        "request": "launch",
+        "type": "dart",
+        "flutterMode": "debug",
+        "deviceId": "emulator-5554"
+      },
     //   {
     //     "name": "Xiaomi",
     //     "program": "lib/main.dart",
@@ -49,7 +49,7 @@
           "Chrome",
           // "macOS",
           // "iOS"
-          // "Android (emulador)",
+          "Android (emulador)",
           // "Xiaomi",
         ]
       }
