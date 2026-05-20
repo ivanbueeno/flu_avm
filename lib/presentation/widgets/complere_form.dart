@@ -202,4 +202,16 @@ class ComplereForm extends ConsumerWidget {
                 ),
                 SizedBox(height: 16),
               ],
-           
+            ),
+          ),
+        );
+      },
+    );
+
+    // Si se ha seleccionado un color, se establece como estado del provider
+    if (electusColor != null) {
+      ref.read(formColorProvider.notifier).state = electusColor;
+    }
+  }
+
+}
