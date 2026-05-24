@@ -1,5 +1,6 @@
 
 import 'package:flu_avm/presentation/screens/screens.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final appRouter = GoRouter(
@@ -20,6 +21,19 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/charta',
       builder: (context, state) => const ChartaScreen(),
+    ),
+    GoRoute(
+      path: '/request',
+      builder: (context, state) => const PokemonsScreen(),
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) {
+            final id = state.pathParameters['id'] ?? '1';
+            return PokemonScreen(pokemonId: id,);
+          },
+        )
+      ]
     ),
   ]
 );
