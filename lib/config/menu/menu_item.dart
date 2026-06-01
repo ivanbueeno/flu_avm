@@ -40,4 +40,10 @@ const appMenuItems = <MenuItem>[
     link: '/request',
     icon: Icons.catching_pokemon
   ),
+  MenuItem(
+    titulus: 'Mi Portfolio',
+    subtitulus: 'Cortometrajes y videojuegos desarrollados',
+    link: '/portfolio',
+    icon: Icons.work_outline,
+  ),
 ];
