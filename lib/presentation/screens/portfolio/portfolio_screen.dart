@@ -13,7 +13,6 @@ class PortfolioScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-
           /// CABECERA
           Card(
             child: Padding(
@@ -45,6 +44,37 @@ class PortfolioScreen extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+
+          const SizedBox(height: 20),
+
+          /// ESTADÍSTICAS
+          Row(
+            children: const [
+              Expanded(
+                child: _StatCard(
+                  value: '7',
+                  label: 'Proyectos',
+                  icon: Icons.folder_outlined,
+                ),
+              ),
+              SizedBox(width: 12),
+              Expanded(
+                child: _StatCard(
+                  value: '4',
+                  label: 'Cortos',
+                  icon: Icons.movie_creation_outlined,
+                ),
+              ),
+              SizedBox(width: 12),
+              Expanded(
+                child: _StatCard(
+                  value: '3',
+                  label: 'Juegos',
+                  icon: Icons.sports_esports_outlined,
+                ),
+              ),
+            ],
           ),
 
           const SizedBox(height: 30),
@@ -153,6 +183,56 @@ class _SectionTitle extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _StatCard extends StatelessWidget {
+  final String value;
+  final String label;
+  final IconData icon;
+
+  const _StatCard({
+    required this.value,
+    required this.label,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Card(
+      elevation: 2,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 16,
+          horizontal: 8,
+        ),
+        child: Column(
+          children: [
+            Icon(
+              icon,
+              color: colorScheme.primary,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              value,
+              style: const TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
