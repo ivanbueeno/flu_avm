@@ -91,6 +91,7 @@ class PortfolioScreen extends StatelessWidget {
             title: 'Baking Bread',
             subtitle: 'Premio Polireto 2023',
             year: '2023',
+            imageAsset: 'assets/projects/baking_bread.JPG',
             icon: Icons.emoji_events_outlined,
             onTap: () => context.push('/portfolio/baking-bread'),
           ),
@@ -99,6 +100,7 @@ class PortfolioScreen extends StatelessWidget {
             title: 'Polizuma Seven',
             subtitle: 'Drama deportivo',
             year: '2023',
+            imageAsset: 'assets/projects/polizuma_seven.JPG',
             icon: Icons.sports_soccer,
             onTap: () => context.push('/portfolio/polizuma-seven'),
           ),
@@ -107,6 +109,7 @@ class PortfolioScreen extends StatelessWidget {
             title: 'ChickenFellas',
             subtitle: 'Comedia criminal',
             year: '2025',
+            imageAsset: 'assets/projects/chicken_fellas.JPG',
             icon: Icons.restaurant,
             onTap: () => context.push('/portfolio/chickenfellas'),
           ),
@@ -115,6 +118,7 @@ class PortfolioScreen extends StatelessWidget {
             title: 'Querida Valencia',
             subtitle: 'Poema audiovisual',
             year: '2026',
+            imageAsset: 'assets/projects/querida_valencia.png',
             icon: Icons.location_city,
             onTap: () => context.push('/portfolio/querida-valencia'),
           ),
@@ -133,14 +137,16 @@ class PortfolioScreen extends StatelessWidget {
             title: 'MECA GO',
             subtitle: 'Arcade Pixel Art',
             year: '2024',
+            imageAsset: 'assets/projects/meca_go.png',
             icon: Icons.videogame_asset_outlined,
             onTap: () => context.push('/portfolio/meca-go'),
           ),
 
           _ProjectCard(
-            title: 'MECA GO 2',
+            title: 'MECA GO 2: Al Fondo a la Derecha',
             subtitle: 'Plataformas Pixel Art',
             year: '2024',
+            imageAsset: 'assets/projects/meca_go_2.png',
             icon: Icons.games_outlined,
             onTap: () => context.push('/portfolio/meca-go-2'),
           ),
@@ -149,6 +155,7 @@ class PortfolioScreen extends StatelessWidget {
             title: 'Presidente por un Día',
             subtitle: 'Simulación y toma de decisiones',
             year: '2025',
+            imageAsset: 'assets/projects/presidente.png',
             icon: Icons.account_balance_outlined,
             onTap: () => context.push('/portfolio/presidente-por-un-dia'),
           ),
@@ -241,6 +248,7 @@ class _ProjectCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String year;
+  final String imageAsset;
   final IconData icon;
   final VoidCallback onTap;
 
@@ -248,6 +256,7 @@ class _ProjectCard extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.year,
+    required this.imageAsset,
     required this.icon,
     required this.onTap,
   });
@@ -257,8 +266,17 @@ class _ProjectCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
-        leading: CircleAvatar(
-          child: Icon(icon),
+        leading: Hero(
+          tag: title,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset(
+              imageAsset,
+              width: 60,
+              height: 60,
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
         title: Text(
           title,

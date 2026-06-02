@@ -56,12 +56,15 @@ class ProjectDetailScreen extends StatelessWidget {
           children: [
 
             /// IMAGEN
-            SizedBox(
-              width: double.infinity,
-              height: 250,
-              child: Image.asset(
-                project.imageAsset,
-                fit: BoxFit.cover,
+            Hero(
+              tag: project.title,
+              child: SizedBox(
+                width: double.infinity,
+                height: 250,
+                child: Image.asset(
+                  project.imageAsset,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
 
