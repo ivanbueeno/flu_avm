@@ -5,27 +5,31 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:math' as math;
 import 'package:go_router/go_router.dart';
 
-
 class DomusScreen extends ConsumerWidget {
   const DomusScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final bool estTenebrisModus = ref.watch(estTenebrisModusProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flu Avm App'),
+        title: const Text(
+          'Flu AVM',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         actions: [
           IconButton(
             onPressed: () {
-              ref.read(estTenebrisModusProvider.notifier).state = !estTenebrisModus;
+              ref.read(estTenebrisModusProvider.notifier).state =
+                  !estTenebrisModus;
             },
             icon: Icon(
-              estTenebrisModus 
-                ? Icons.dark_mode_outlined 
-                : Icons.light_mode_outlined
+              estTenebrisModus
+                  ? Icons.dark_mode_outlined
+                  : Icons.light_mode_outlined,
             ),
           ),
         ],
@@ -34,12 +38,30 @@ class DomusScreen extends ConsumerWidget {
         children: [
           Image.asset(
             'assets/images/valencia.jpg',
-            // height: 170,
             width: double.infinity,
             fit: BoxFit.contain,
           ),
-          Expanded(
-            child: _DomusView()
+
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Column(
+              children: [
+                Text(
+                  'Bienvenido',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Explora las funcionalidades y proyectos de la aplicación',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
+            ),
+          ),
+
+          const Expanded(
+            child: _DomusView(),
           ),
         ],
       ),
@@ -47,51 +69,75 @@ class DomusScreen extends ConsumerWidget {
   }
 }
 
-
 class _DomusView extends StatelessWidget {
   const _DomusView();
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      padding: const EdgeInsets.only(bottom: 12),
       itemCount: appMenuItems.length,
       itemBuilder: (context, index) {
         final menuItem = appMenuItems[index];
-        return _PropriumListTile( menuItem: menuItem );
+        return _PropriumListTile(menuItem: menuItem);
       },
     );
   }
 }
 
 class _PropriumListTile extends StatelessWidget {
-
   final MenuItem menuItem;
 
   const _PropriumListTile({
-    required this.menuItem
+    required this.menuItem,
   });
 
   @override
   Widget build(BuildContext context) {
-
     final colorum = Theme.of(context).colorScheme;
 
-    return ListTile(
-      title: Text(menuItem.titulus),
-      subtitle: Text(menuItem.subtitulus),
-      trailing: Icon(Icons.arrow_forward_ios_rounded, color: colorum.primary,),
-      leading: CircleAvatar(
-        backgroundColor: Color.fromARGB(
-          100, 
-          math.Random().nextInt(256), 
-          math.Random().nextInt(256), 
-          math.Random().nextInt(256)
-        ),
-        child: Icon(menuItem.icon, color: Colors.black,),
+    return Card(
+      elevation: 2,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 16,
+        vertical: 6,
       ),
-      onTap: () {
-        context.push(menuItem.link);
-      },
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 8,
+        ),
+        leading: CircleAvatar(
+          backgroundColor: Color.fromARGB(
+            100,
+            math.Random().nextInt(256),
+            math.Random().nextInt(256),
+            math.Random().nextInt(256),
+          ),
+          child: Icon(
+            menuItem.icon,
+            color: Colors.black,
+          ),
+        ),
+        title: Text(
+          menuItem.titulus,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        subtitle: Text(menuItem.subtitulus),
+        trailing: Icon(
+          Icons.arrow_forward_ios_rounded,
+          color: colorum.primary,
+          size: 18,
+        ),
+        onTap: () {
+          context.push(menuItem.link);
+        },
+      ),
     );
   }
 }
